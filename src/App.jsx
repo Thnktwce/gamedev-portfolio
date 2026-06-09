@@ -1,122 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { games } from './data';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+    return (
+        <div className="min-h-screen bg-gray-950 text-white font-sans selection:bg-purple-500">
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+            {/* Первый экран (Hero) */}
+            <header className="flex flex-col items-center justify-center h-screen text-center px-4">
+                <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+                    Мы создаем <span className="text-purple-500">миры</span>
+                </h1>
+                <p className="text-xl text-gray-400 max-w-2xl mb-8">
+                    Независимая студия разработки мобильных игр. Делаем проекты, в которые хочется играть без остановки.
+                </p>
+                <button className="px-8 py-3 bg-purple-600 hover:bg-purple-700 transition-colors rounded-full font-semibold">
+                    Посмотреть проекты
+                </button>
+            </header>
+
+            {/* Секция с играми */}
+            <main className="max-w-6xl mx-auto px-4 py-20" id="portfolio">
+                <h2 className="text-3xl font-bold mb-10 border-b border-gray-800 pb-4">
+                    Наши игры
+                </h2>
+
+                {/* Сетка карточек */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {games.map((game) => (
+                        <div key={game.id} className="bg-gray-900 rounded-2xl overflow-hidden group border border-gray-800 hover:border-purple-500 transition-all duration-300">
+                            {/* Картинка-заглушка */}
+                            <div className="overflow-hidden">
+                                <img
+                                    src={game.image}
+                                    alt={game.title}
+                                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                            </div>
+
+                            {/* Описание игры */}
+                            <div className="p-6">
+                                <div className="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2">
+                                    {game.engine}
+                                </div>
+                                <h3 className="text-2xl font-bold mb-2">{game.title}</h3>
+                                <p className="text-gray-400 mb-6">{game.description}</p>
+                                <a
+                                    href={game.link}
+                                    className="inline-block px-6 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors font-medium"
+                                >
+                                    Подробнее
+                                </a>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </main>
+
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    );
 }
-
-export default App
